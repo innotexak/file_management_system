@@ -1,7 +1,8 @@
-```CInstance File System (CFS)```
+# CInstance File System (CFS)
+
 The CFS is a file management system that enables secure client-side uploads to AWS S3. It validates API keys for access and provides endpoints for file uploads, retrieval, and deletion. The system ensures secure file transfers using S3, with key validation done through x-public-key and x-secret-key headers. The CFS also supports dynamic versioning in the API routes (e.g., /api/v1/, /api/v2/).
 
-Features
+# Features
 Secure API key validation using x-public-key and x-secret-key.
 File upload, retrieval, and deletion to/from AWS S3.
 Dynamic API versioning for seamless upgrades without breaking backward compatibility.
@@ -18,11 +19,11 @@ Copy code
 AWS_ACCESS_KEY_ID=your_access_key
 AWS_SECRET_ACCESS_KEY=your_secret_key
 AWS_S3_BUCKET_NAME=your_bucket_name
-REDIS_URL=redis://localhost:6379
+
 Installation
 Clone the repository:
 
-bash
+# bash
 Copy code
 git clone https://github.com/your-repo/cinstance-file-system.git
 cd cinstance-file-system
@@ -35,8 +36,7 @@ Create a .env file with the necessary configurations (see Environment Variables)
 
 Run the application:
 
-bash
-Copy code
+
 npm start
 API Routes
 All routes are prefixed with /api/:version/, where :version can be v1, v2, etc., for dynamic versioning.
