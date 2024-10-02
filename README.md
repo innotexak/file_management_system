@@ -1,6 +1,6 @@
-# CInstance File System (CFS)
+# Innotexic File System (IFS)
 
-The CFS is a file management system that enables secure client-side uploads to AWS S3. It validates API keys for access and provides endpoints for file uploads, retrieval, and deletion. The system ensures secure file transfers using S3, with key validation done through x-public-key and x-secret-key headers. The CFS also supports dynamic versioning in the API routes (e.g., /api/v1/, /api/v2/).
+The IFS is a file management system that enables secure client-side uploads to AWS S3. It validates API keys for access and provides endpoints for file uploads, retrieval, and deletion. The system ensures secure file transfers using S3, with key validation done through x-public-key and x-secret-key headers. The CFS also supports dynamic versioning in the API routes (e.g., /api/v1/, /api/v2/).
 
 # Features
 Secure API key validation using x-public-key and x-secret-key.
@@ -14,30 +14,29 @@ Redis for session/key management (optional but recommended).
 Environment Variables
 Make sure you have the following environment variables configured:
 
-bash
+```
 Copy code
 AWS_ACCESS_KEY_ID=your_access_key
 AWS_SECRET_ACCESS_KEY=your_secret_key
 AWS_S3_BUCKET_NAME=your_bucket_name
-
+```
 Installation
 Clone the repository:
 
-# bash
+```
 Copy code
-git clone https://github.com/your-repo/cinstance-file-system.git
-cd cinstance-file-system
+git clone https://github.com/your-repo/file-system.git
+cd file-system
 Install dependencies:
 
-bash
-Copy code
 npm install
+```
 Create a .env file with the necessary configurations (see Environment Variables).
 
 Run the application:
-
-
+```
 npm start
+```
 API Routes
 All routes are prefixed with /api/:version/, where :version can be v1, v2, etc., for dynamic versioning.
 
@@ -63,24 +62,25 @@ Response:
 }
 ```
 Error Response:
-json
-Copy code
+
+```
 {
   "message": "Invalid API keys.",
   "data": null,
   "error": true
 }
+```
 2. Retrieve File
 GET /api/:version/file/:key
 
 Fetches a file from AWS S3 using the file key.
-
+```
 Headers:
 x-public-key: API public key
 x-secret-key: API secret key
+```
 Response:
-json
-Copy code
+```
 {
   "message": "File retrieved successfully.",
   "data": {
@@ -92,48 +92,50 @@ Copy code
   },
   "error": false
 }
+```
 Error Response:
-json
-Copy code
+```
 {
   "message": "File not found.",
   "data": null,
   "error": true
 }
+```
 3. Delete File
 DELETE /api/:version/delete/:key
 
 Deletes a file from AWS S3 using the file key.
-
+```
 Headers:
 x-public-key: API public key
 x-secret-key: API secret key
+```
 Response:
-json
-Copy code
+```
 {
   "message": "File deleted successfully.",
   "data": null,
   "error": false
 }
+```
 Error Response:
-json
-Copy code
+```
 {
   "message": "File deletion failed.",
   "data": null,
   "error": true
 }
+```
 API Key Validation
 Each request requires API key validation using the x-public-key and x-secret-key headers. The keys must be valid; otherwise, the request will return an error message:
 
-json
-Copy code
+```
 {
   "message": "Invalid API keys.",
   "data": null,
   "error": true
 }
+```
 Response Format
 Each API response follows a consistent format:
 
@@ -144,22 +146,24 @@ Dynamic API Versioning
 The CFS uses dynamic API versioning by accepting a :version parameter in the URL (e.g., /api/v1/, /api/v2/). This enables future upgrades and version management without breaking existing API consumers.
 
 Example Usage
-bash
-Copy code
 # Request a file upload
+```
 curl -X POST http://localhost:3000/api/v1/file/request \
   -H "x-public-key: your_public_key" \
   -H "x-secret-key: your_secret_key"
-
+```
 # Retrieve a file
+```
 curl -X GET http://localhost:3000/api/v1/file/your-file-key \
   -H "x-public-key: your_public_key" \
   -H "x-secret-key: your_secret_key"
-
+```
 # Delete a file
+```
 curl -X DELETE http://localhost:3000/api/v1/delete/your-file-key \
   -H "x-public-key: your_public_key" \
   -H "x-secret-key: your_secret_key"
+```
 License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
