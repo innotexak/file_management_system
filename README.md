@@ -50,7 +50,8 @@ Headers:
 x-public-key: API public key
 x-secret-key: API secret key
 Response:
-json
+
+JSON
 Copy code
 {
   "message": "Pre-signed URL generated successfully.",
