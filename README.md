@@ -45,14 +45,14 @@ All routes are prefixed with /api/:version/, where :version can be v1, v2, etc.,
 POST /api/:version/file/request
 
 Initiates a request for a pre-signed URL to upload a file to AWS S3.
-
+```
 Headers:
 x-public-key: API public key
 x-secret-key: API secret key
+```
 Response:
 
-JSON
-Copy code
+```
 {
   "message": "Pre-signed URL generated successfully.",
   "data": {
@@ -61,6 +61,7 @@ Copy code
   },
   "error": false
 }
+```
 Error Response:
 json
 Copy code
